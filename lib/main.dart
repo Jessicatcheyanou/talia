@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             title: Text("Talia's First App"),
+            backgroundColor: Colors.amber,
           ),
           body: HomeScreen(),
         ));
