@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:talia/app_screens/home_screen.dart';
+
+import './app_screens/home.dart';
 
 //entry point on main application
 void main() {
@@ -14,13 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Exploring UI widgets',
         home: Scaffold(
           appBar: AppBar(
             title: Text("Talia's First App"),
             backgroundColor: Colors.amber,
           ),
-          body: HomeScreen(),
+          body: Home(),
         ));
   }
 }
