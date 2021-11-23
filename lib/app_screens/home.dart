@@ -12,7 +12,12 @@ class Home extends StatelessWidget {
       child: Text(
         "Flight",
         textDirection: TextDirection.ltr,
-        style: TextStyle(decoration: TextDecoration.none, fontSize: 75.0),
+        style: TextStyle(
+            decoration: TextDecoration.none,
+            fontSize: 75.0,
+            fontFamily: "Raleway",
+            fontWeight: FontWeight.w700,
+            color: Colors.white),
       ),
     ));
   }
