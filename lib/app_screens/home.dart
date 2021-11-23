@@ -86,7 +86,8 @@ class Home extends StatelessWidget {
                     )),
                   ],
                 ),
-                PonyTailAsset()
+                PonyTailAsset(),
+                PonyTailButton()
               ],
             )));
   }
@@ -97,9 +98,42 @@ class PonyTailAsset extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     AssetImage assetImage = AssetImage('images/ponytail.jpg');
-    Image image = Image(image: assetImage);
+    Image image = Image(
+      image: assetImage,
+      fit: BoxFit.fill,
+    );
     return Container(
       child: image,
+      width: 250.0,
+      height: 200.0,
     );
   }
 }
+
+class PonyTailButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      width: 150.0,
+      height: 50.0,
+      child: RaisedButton(
+        color: Colors.deepOrange,
+        child: Text(
+          "Contact Her",
+          style: TextStyle(
+              fontSize: 20.0,
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.w600),
+        ),
+        elevation: 6.0,
+        onPressed: () {
+          //action
+          bookHer(context)
+        },
+      ),
+    );
+  }
+}
+
+
