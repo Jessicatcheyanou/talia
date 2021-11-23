@@ -85,8 +85,21 @@ class Home extends StatelessWidget {
                           color: Colors.white),
                     )),
                   ],
-                )
+                ),
+                PonyTailAsset()
               ],
             )));
+  }
+}
+
+class PonyTailAsset extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    AssetImage assetImage = AssetImage('images/ponytail.jpg');
+    Image image = Image(image: assetImage);
+    return Container(
+      child: image,
+    );
   }
 }
