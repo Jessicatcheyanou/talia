@@ -127,13 +127,18 @@ class PonyTailButton extends StatelessWidget {
               fontWeight: FontWeight.w600),
         ),
         elevation: 6.0,
-        onPressed: () {
-          //action
-          bookHer(context)
-        },
+        onPressed: () =>
+            //action
+            bookHer(context),
       ),
     );
   }
 }
 
+void bookHer(BuildContext context) {
+  var alertDialog = AlertDialog(
+      title: Text("Contacted Her Successfully"),
+      content: Text('Have a nice time'));
 
+  showDialog(context: context, builder: (BuildContext context) => alertDialog);
+}
