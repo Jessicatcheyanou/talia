@@ -5,40 +5,25 @@ import 'package:flutter/material.dart';
 //entry point on main application
 void main() {
   runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: "Exploring UI Widgets",
-    home: Scaffold(
-      appBar: AppBar(
-        title: Text("Basic List View Elements"),
-      ),
-      body: getListView(),
-    ),
-  ));
+      debugShowCheckedModeBanner: false,
+      title: "Exploring UI Widgets",
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text("Long List"),
+          ),
+          body: getListView())));
+}
+
+List<String> getListElements() {
+  var items = List<String>.generate(1000, (counter) => "Item $counter");
+  return items;
 }
 
 Widget getListView() {
-  var listView = ListView(
-    children: [
-      ListTile(
-        leading: Icon(Icons.landscape),
-        title: Text("Landscape"),
-        subtitle: Text("Beautiful View"),
-        trailing: Icon(Icons.wb_cloudy),
-      ),
-      ListTile(
-        leading: Icon(Icons.image),
-        title: Text("Image"),
-        onTap: () {
-          debugPrint("Landscape tapped");
-        },
-      ),
-      ListTile(leading: Icon(Icons.access_alarm), title: Text("Access Alarm")),
-      Text('Yet another widget of this listView'),
-      Container(
-        color: Colors.red,
-        height: 50.0,
-      )
-    ],
-  );
+  var listItems = getListElements();
+  var listView = ListView.builder(itemBuilder: (context, index) {
+    return ListTile(
+        leading: Icon(Icons.import_contacts), title: Text(listItems[index]));
+  });
   return listView;
 }
