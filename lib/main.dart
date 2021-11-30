@@ -22,6 +22,8 @@ class FavoriteCity extends StatefulWidget {
 //AT runtime,it is the State of the Widget that changes
 class _FavoriteCityState extends State<FavoriteCity> {
   String nameCity = "";
+  var _currencies = ["FCFA", "CAD", "EURO", "DOLLARS"];
+  var _currentItemSelected = "FCFA";
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,19 @@ class _FavoriteCityState extends State<FavoriteCity> {
                 });
               },
             ),
+            DropdownButton<String>(
+              items: _currencies.map((String dropDownStringItem) {
+                return DropdownMenuItem<String>(
+                  value: dropDownStringItem,
+                  child: Text(dropDownStringItem),
+                );
+              }).toList(),
+              onChanged: (var newValueSelected) {
+                //code to execute when a new item is selected from the dropDown
+                _onDropDownItemSelected(newValueSelected!);
+              },
+              value: _currentItemSelected,
+            ),
             Padding(
                 padding: EdgeInsets.all(30.0),
                 child: Text(
@@ -52,5 +67,11 @@ class _FavoriteCityState extends State<FavoriteCity> {
         ),
       ),
     );
+  }
+
+  void _onDropDownItemSelected(var newValueSelected) {
+    setState(() {
+      this._currentItemSelected = newValueSelected!;
+    });
   }
 }
