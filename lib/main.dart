@@ -1,56 +1,56 @@
 import 'package:flutter/material.dart';
 
-//import './app_screens/home.dart';
-
-//entry point on main application
 void main() {
   runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Exploring UI Widgets",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Floating Action Button and Snack Bar"),
+    debugShowCheckedModeBanner: false,
+    title: "Stateful App Example",
+    home: FavoriteCity(),
+  ));
+}
+
+//1.Create a class that extends a Stateful Widget that returns a State in createState()
+class FavoriteCity extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _FavoriteCityState();
+  }
+}
+
+//2.Create a state Class with properties that may change
+//3.Within the State Class,Implement the build() method
+//AT runtime,it is the State of the Widget that changes
+class _FavoriteCityState extends State<FavoriteCity> {
+  String nameCity = "";
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Stateful App Example"),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            TextField(
+              onChanged: (String userInput) {
+                setState(() {
+                  debugPrint("setState is called");
+                  nameCity = userInput;
+                });
+              },
+            ),
+            Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Text(
+                  "Your Best city is $nameCity",
+                  style: TextStyle(fontSize: 20.0),
+                )),
+          ],
         ),
-        body: getListView(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            debugPrint("FAB Clicked");
-          },
-          child: Icon(Icons.add),
-          tooltip: "Add one more Item",
-        ),
-      )));
-}
-
-void showSnackBar(BuildContext context, String item) {
-  var snackBar = SnackBar(
-    content: Text("You just tapped $item"),
-    action: SnackBarAction(
-      label: "UNDO",
-      onPressed: () {
-        debugPrint('Performing dummy UNDO Operation');
-      },
-    ),
-  );
-
-  Scaffold.of(context).showSnackBar(snackBar);
-}
-
-List<String> getListElements() {
-  var items = List<String>.generate(1000, (counter) => "Item $counter");
-  return items;
-}
-
-Widget getListView() {
-  var listItems = getListElements();
-  var listView = ListView.builder(itemBuilder: (context, index) {
-    return ListTile(
-      leading: Icon(Icons.import_contacts),
-      title: Text(listItems[index]),
-      onTap: () {
-        showSnackBar(context, listItems[index]);
-      },
+      ),
     );
-  });
-  return listView;
+  }
 }
