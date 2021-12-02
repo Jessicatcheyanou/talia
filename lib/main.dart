@@ -1,77 +1,125 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: "Stateful App Example",
-    home: FavoriteCity(),
+    home: SIForm(),
   ));
 }
 
-//1.Create a class that extends a Stateful Widget that returns a State in createState()
-class FavoriteCity extends StatefulWidget {
+class SIForm extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _FavoriteCityState();
+    return _SIFormState();
   }
 }
 
-//2.Create a state Class with properties that may change
-//3.Within the State Class,Implement the build() method
-//AT runtime,it is the State of the Widget that changes
-class _FavoriteCityState extends State<FavoriteCity> {
-  String nameCity = "";
-  var _currencies = ["FCFA", "CAD", "EURO", "DOLLARS"];
-  var _currentItemSelected = "FCFA";
+class _SIFormState extends State<SIForm> {
+  var _currencies = ['Rupees', 'Dollars', 'Pounds'];
+  final _minimumPadding = 5.0;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Stateful App Example"),
+        title: Text('Simple Interest Calculator'),
       ),
       body: Container(
-        margin: EdgeInsets.all(20.0),
-        child: Column(
+        margin: EdgeInsets.all(_minimumPadding * 2),
+        child: ListView(
           children: [
-            TextField(
-              onChanged: (String userInput) {
-                setState(() {
-                  debugPrint("setState is called");
-                  nameCity = userInput;
-                });
-              },
-            ),
-            DropdownButton<String>(
-              items: _currencies.map((String dropDownStringItem) {
-                return DropdownMenuItem<String>(
-                  value: dropDownStringItem,
-                  child: Text(dropDownStringItem),
-                );
-              }).toList(),
-              onChanged: (var newValueSelected) {
-                //code to execute when a new item is selected from the dropDown
-                _onDropDownItemSelected(newValueSelected!);
-              },
-              value: _currentItemSelected,
+            getImageAsset(),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: _minimumPadding, bottom: _minimumPadding),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      labelText: 'Principal',
+                      hintText: 'Enter Principal e.g. 12000',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                )),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: _minimumPadding, bottom: _minimumPadding),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                      labelText: 'Rate of Interest',
+                      hintText: 'In percent',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0))),
+                )),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: _minimumPadding, bottom: _minimumPadding),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          labelText: 'Term',
+                          hintText: 'Time in years',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0))),
+                    )),
+                    Container(
+                      width: _minimumPadding * 5,
+                    ),
+                    Expanded(
+                        child: DropdownButton<String>(
+                      items: _currencies.map((String value) {
+                        return DropdownMenuItem(
+                            value: value, child: Text(value));
+                      }).toList(),
+                      value: 'Rupees',
+                      onChanged: (var newValueSelected) {
+                        //
+                      },
+                    ))
+                  ],
+                )),
+            Row(
+              children: [
+                Expanded(
+                    child: RaisedButton(
+                  onPressed: () {},
+                  child: Text('Calculate'),
+                )),
+                Expanded(
+                    child: RaisedButton(
+                  onPressed: () {},
+                  child: Text('Reset'),
+                ))
+              ],
             ),
             Padding(
-                padding: EdgeInsets.all(30.0),
-                child: Text(
-                  "Your Best city is $nameCity",
-                  style: TextStyle(fontSize: 20.0),
-                )),
+              padding: EdgeInsets.all(_minimumPadding * 2),
+              child: Text('Todo Text'),
+            )
           ],
         ),
       ),
     );
   }
 
-  void _onDropDownItemSelected(var newValueSelected) {
-    setState(() {
-      this._currentItemSelected = newValueSelected!;
-    });
+  Widget getImageAsset() {
+    AssetImage assetImage = AssetImage('images/LDTV.jpg');
+    Image image = Image(
+      image: assetImage,
+      width: 125.0,
+      height: 125.0,
+    );
+
+    return Container(
+      child: image,
+      margin: EdgeInsets.all(_minimumPadding * 10),
+    );
   }
 }
